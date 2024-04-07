@@ -3,7 +3,6 @@ import { counterStyles } from "./styles";
 import "./App.css";
 
 function App() {
-  console.log();
   const [count, setCount] = useState(
     JSON.parse(localStorage.getItem("count")) || 0
   );
