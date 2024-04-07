@@ -3,8 +3,10 @@ import { counterStyles } from "./styles";
 import "./App.css";
 
 function App() {
-  console.log(localStorage.getItem("count"));
-  const [count, setCount] = useState(0);
+  console.log();
+  const [count, setCount] = useState(
+    JSON.parse(localStorage.getItem("count")) || 0
+  );
 
   const increamentCount = () => setCount(count + 1);
   const decreamentCount = () => setCount(count - 1);
