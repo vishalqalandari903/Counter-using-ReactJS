@@ -1,44 +1,42 @@
 import { useEffect, useState } from "react";
 import { counterStyles } from "../styles";
 import github from "../assets/github.png";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  increamentCount,
+  decreamentCount,
+  resetCount,
+} from "../app/slices/counter";
 
 function Counter() {
-  const [count, setCount] = useState(
-    JSON.parse(localStorage.getItem("count")) || 0
-  );
-
-  const increamentCount = () => setCount(count + 1);
-  const decreamentCount = () => setCount(count - 1);
-  const resetCount = () => setCount(0);
+  const counter = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
+  localStorage.setItem("count", JSON.stringify(counter));
 
   const actionButtons = [
     {
       id: 3,
       name: "increament",
-      action: increamentCount,
+      action: () => dispatch(increamentCount()),
       className: `increament ${counterStyles.backgroundButton}`,
       icon: <i className="fa-solid fa-plus"></i>,
     },
     {
       id: 1,
       name: "decreament",
-      action: decreamentCount,
+      action: () => dispatch(decreamentCount()),
       className: `decreament ${counterStyles.backgroundButton}`,
       icon: <i className="fa-solid fa-minus"></i>,
     },
     {
       id: 2,
       name: "reset",
-      action: resetCount,
+      action: () => dispatch(resetCount()),
       className: `reset ${counterStyles.borderButton}`,
       icon: <i className="fa fa-refresh" aria-hidden="true"></i>,
     },
   ];
   actionButtons.sort((a, b) => a.id - b.id);
-
-  useEffect(() => {
-    localStorage.setItem("count", JSON.stringify(count));
-  }, [count]);
 
   return (
     <>
@@ -63,7 +61,10 @@ function Counter() {
               />
             </div>
           </div>
-          <h1 className={`counter ${counterStyles.counterText}`}>{count}</h1>
+          <h1 className={`counter ${counterStyles.counterText}`}>
+            {counter}
+            {/* {count} */}
+          </h1>
           <div className="actions flex gap-4 justify-center  text-center py-3 text-xl">
             {actionButtons.map((actionButton) => (
               <button
