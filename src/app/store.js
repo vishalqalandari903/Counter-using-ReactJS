@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterSlice from "./slices/counter";
-console.log(counterSlice);
+import themeModeSlice from "./slices/theme";
 
 export const store = configureStore({
   reducer: {
     counter: counterSlice,
+    themeMode: themeModeSlice,
   },
 });
