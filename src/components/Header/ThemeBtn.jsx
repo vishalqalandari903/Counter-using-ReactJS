@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-// import useTheme from "../context/theme";
 import { darkMode, lightMode } from "../../app/slices/theme";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ThemeBtn() {
   const themeMode = useSelector((state) => state.themeMode);
+  console.log(themeMode);
   const dispatch = useDispatch();
 
   useEffect(() => {
     document.querySelector("html").classList.remove("dark", "light");
+
     document.querySelector("html").classList.add(themeMode);
   }, [themeMode]);
   const changeTheme = (e) => {
