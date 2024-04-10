@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function ThemeBtn() {
   const themeMode = useSelector((state) => state.themeMode);
-  console.log(themeMode);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     document.querySelector("html").classList.remove("dark", "light");
-
     document.querySelector("html").classList.add(themeMode);
+    localStorage.setItem("themeMode", themeMode);
   }, [themeMode]);
   const changeTheme = (e) => {
     const darkModeStatus = e.currentTarget.checked;
